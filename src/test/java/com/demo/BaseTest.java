@@ -12,6 +12,8 @@ import java.util.Arrays;
 
 public abstract class BaseTest {
 
+    protected static final String INVOICE_TRANSFORM_URI = "/invoice/transform";
+
     protected InvoiceDTO buildInvoiceDTO() {
         final InvoiceItemDTO invoiceItemDTO = new InvoiceItemDTO();
         invoiceItemDTO.setAmount(BigDecimal.TEN);

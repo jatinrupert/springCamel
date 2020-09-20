@@ -23,8 +23,6 @@ import static org.hamcrest.Matchers.*;
 @AutoConfigureMockMvc
 public class InvoiceTransformTest extends BaseTest {
 
-    private static final String INVOICE_TRANSFORM_URI = "/invoice/transform";
-
     @Autowired
     private MockMvc mockMvc;
 

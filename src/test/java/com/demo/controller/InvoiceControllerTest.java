@@ -23,8 +23,6 @@ import static org.mockito.Mockito.*;
 @RunWith(MockitoJUnitRunner.class)
 public class InvoiceControllerTest extends BaseTest {
 
-    private static final String INVOICE_TRANSFORM_URI = "/invoice/transform";
-
     private MockMvc mockMvc;
 
     @Mock

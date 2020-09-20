@@ -22,7 +22,7 @@ public class InvoiceController {
         return new ResponseEntity<>("Demo is running...", HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/transform", method = RequestMethod.POST)
+    @RequestMapping(value = "/transform", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> transformInvoice(@Valid @RequestBody InvoiceDTO invoice) {
         final String message = invoiceService.transformInvoice(invoice);
         return ResponseEntity.status(HttpStatus.OK).body(message);
