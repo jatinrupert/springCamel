@@ -82,6 +82,13 @@
             <version>2.22.0</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-test-spring</artifactId>
+            <version>3.0.0-M4</version>
+            <scope>test</scope>
+        </dependency>
+
 
     </dependencies>
  

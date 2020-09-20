@@ -1,7 +1,6 @@
 package com.demo;
 
 import com.demo.dto.InvoiceDTO;
-import com.demo.dto.InvoiceItemDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.junit.Test;
@@ -14,9 +13,6 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.math.BigDecimal;
-import java.util.Arrays;
-
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.hamcrest.Matchers.*;
@@ -25,7 +21,7 @@ import static org.hamcrest.Matchers.*;
 @SpringBootTest
 @ActiveProfiles("test")
 @AutoConfigureMockMvc
-public class InvoiceTransformTest {
+public class InvoiceTransformTest extends BaseTest {
 
     private static final String INVOICE_TRANSFORM_URI = "/invoice/transform";
 
@@ -39,17 +35,7 @@ public class InvoiceTransformTest {
         this.mockMvc.perform(post(INVOICE_TRANSFORM_URI).contentType(MediaType.APPLICATION_JSON)
             .content(objectMapper.writeValueAsString(buildInvoiceDTO())).accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(content().string(equalToIgnoringWhiteSpace("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-                        "<invoice invoiceid=\"1234\">\n" +
-                        "    <invoiceto>Test to</invoiceto>\n" +
-                        "    <invoicefrom>Test from</invoicefrom>\n" +
-                        "    <item>\n" +
-                        "        <currency>GBP</currency>\n" +
-                        "        <note>testing GBP</note>\n" +
-                        "        <quantity>2</quantity>\n" +
-                        "        <price>10</price>\n" +
-                        "    </item>\n" +
-                        "</invoice>")));
+                .andExpect(content().string(equalToIgnoringWhiteSpace(getExpectedOutput())));
     }
 
     @Test
@@ -71,22 +57,6 @@ public class InvoiceTransformTest {
                 .andExpect(status().isUnprocessableEntity())
                 .andExpect(content().string(containsString("Invalid content was found starting with element 'price'. One of '{quantity}' is expected.")));
 
-    }
-
-    private InvoiceDTO buildInvoiceDTO() {
-        final InvoiceItemDTO invoiceItemDTO = new InvoiceItemDTO();
-        invoiceItemDTO.setAmount(BigDecimal.TEN);
-        invoiceItemDTO.setCurrency("GBP");
-        invoiceItemDTO.setDescription("testing GBP");
-        invoiceItemDTO.setQuantity(2);
-
-        final InvoiceDTO invoiceDTO = new InvoiceDTO();
-        invoiceDTO.setInvoiceId(1234L);
-        invoiceDTO.setInvoicedTo("Test to");
-        invoiceDTO.setInvoiceFrom("Test from");
-        invoiceDTO.setInvoiceItems(Arrays.asList(invoiceItemDTO));
-
-        return invoiceDTO;
     }
 
 }

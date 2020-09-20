@@ -13,7 +13,7 @@ The REST endpoint is :
 To run the build we will need to run the command
 >mvn clean install
 
-This will execute the complie, and also run a few tests which involve tests for the Controller, for the actual route, and a end to end test which involves checks to make sure the transformation happens.
+This will execute the compile, and also run a few tests which involve tests for the Controller, for the actual route, and a end to end test which involves checks to make sure the transformation happens.
 A few negative cases have also been added in
 
 This build was created, tested and deployed on openjdk11, but should be compliant with jdk 8

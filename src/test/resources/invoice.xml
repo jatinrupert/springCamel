@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<invoice invoiceid="1234">
+    <invoiceto>Test to</invoiceto>
+    <invoicefrom>Test from</invoicefrom>
+    <item>
+        <currency>GBP</currency>
+        <note>testing GBP</note>
+        <quantity>2</quantity>
+        <price>10</price>
+    </item>
+</invoice>

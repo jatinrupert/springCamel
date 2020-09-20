@@ -1,7 +1,7 @@
 package com.demo.controller;
 
+import com.demo.BaseTest;
 import com.demo.dto.InvoiceDTO;
-import com.demo.dto.InvoiceItemDTO;
 import com.demo.service.InvoiceService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
@@ -15,16 +15,13 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import java.math.BigDecimal;
-import java.util.Arrays;
-
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class InvoiceControllerTest {
+public class InvoiceControllerTest extends BaseTest {
 
     private static final String INVOICE_TRANSFORM_URI = "/invoice/transform";
 
@@ -70,22 +67,6 @@ public class InvoiceControllerTest {
                 .content(objectMapper.writeValueAsString(invoiceDTO)).accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isInternalServerError());
 
-    }
-
-    private InvoiceDTO buildInvoiceDTO() {
-        final InvoiceItemDTO invoiceItemDTO = new InvoiceItemDTO();
-        invoiceItemDTO.setAmount(BigDecimal.TEN);
-        invoiceItemDTO.setCurrency("GBP");
-        invoiceItemDTO.setDescription("testing GBP");
-        invoiceItemDTO.setQuantity(2);
-
-        final InvoiceDTO invoiceDTO = new InvoiceDTO();
-        invoiceDTO.setInvoiceId(1234L);
-        invoiceDTO.setInvoicedTo("Test to");
-        invoiceDTO.setInvoiceFrom("Test from");
-        invoiceDTO.setInvoiceItems(Arrays.asList(invoiceItemDTO));
-
-        return invoiceDTO;
     }
 
 }
